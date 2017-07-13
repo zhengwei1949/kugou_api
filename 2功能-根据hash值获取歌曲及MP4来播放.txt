@@ -1,0 +1,51 @@
+2. 根据 歌曲hash值 查看歌曲MP4：
+    http://m.kugou.com/app/i/getSongInfo.php?hash=97394a77e8461db7911b552f43ea4770&cmd=playInfo
+    里面 url 就是 对应 歌曲地址。
+
+    我们在第一次请求歌曲列表返回来的JSON中，每一个歌曲都有对应的 hash 值
+    {
+        "status":1,
+        ...
+        "data": {
+            ...
+            "info":[
+                {
+                    "filename": "萌萌哒天团-仙剑",
+                    ...,
+                    "hash": "97394a77e8461db7911b552f43ea4770"
+                    ...
+                },
+                ....
+            ]
+        }
+    }
+    假设 是 萌萌哒天团的 歌曲， 它的 hash 是 97394a77e8461db7911b552f43ea4770
+
+
+    JSONP 跨域地址： http://m.kugou.com/app/i/getSongInfo.php
+        传参 data : {
+                hash : "97394a77e8461db7911b552f43ea4770",  // 歌曲 hash值
+                cmd : 'playInfo',// 写死
+                format:'jsonp'   // 必传参数，写死
+            }
+
+    jquery 写法
+
+    $( function() {
+        $.ajax({
+            url:'http://m.kugou.com/app/i/getSongInfo.php',
+            dataType:'jsonp',
+            data : {
+                hash : "97394a77e8461db7911b552f43ea4770",  // 歌曲 hash值
+                cmd : 'playInfo',       // 写死
+                format:'jsonp'          // 写死
+            },
+            success:function(data){
+                console.log( data );
+                document.write( JSON.stringify( data ) );
+            },
+            error:function(data){
+                console.log('error');
+            }
+        });
+    });

@@ -1,0 +1,30 @@
+http://mobilecdn.kugou.com/api/v3/search/song?format=jsonp&keyword=仙剑&page=1&pagesize=10
+
+JSONP 跨域
+地址： http://mobilecdn.kugou.com/api/v3/search/song
+
+传参 data : {
+        keyword : '仙剑',  // 搜索关键字
+        page: 1,          // 第几页
+        pagesize: 10,    // 一页几个
+        format: jsonp   // 必传参数，写死
+    }
+
+jquery 写法
+    $.ajax({
+        url:'http://mobilecdn.kugou.com/api/v3/search/song',
+        dataType:'jsonp',
+        data : {
+            keyword : '仙剑',  // 搜索关键字
+            page: 1,          // 第几页
+            pagesize: 10,    // 一页几个
+            format:'jsonp'          // 写死
+        },
+        success:function(data){
+            console.log( data );
+            document.write( JSON.stringify( data ) );
+        },
+        error:function(data){
+            console.log('error');
+        }
+    });

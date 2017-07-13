@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>数据测试</title>
+</head>
+<body>
+    <script src="./jquery.min.js"></script>
+    <script>
+    $( function() {
+        $.ajax({
+            url:'http://m.kugou.com/app/i/getSongInfo.php',
+            dataType:'jsonp',
+            data : {
+                hash : "97394a77e8461db7911b552f43ea4770",  // 歌曲 hash值
+                cmd : 'playInfo',       // 写死
+                format:'jsonp'          // 写死
+            },
+            success:function(data){
+                console.log( data );
+                document.write( JSON.stringify( data ) );
+            },
+            error:function(data){
+                console.log('error');
+            }
+        });
+    });
+</script>
+</body>
+
+</html>
